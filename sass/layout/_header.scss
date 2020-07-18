@@ -1,0 +1,23 @@
+.header {
+  min-height: 10vh;
+  @include flex(row, space-between, center);
+  padding: 3rem 0;
+
+  &__logo {
+    color: $color-white;
+  }
+
+  &__burger {
+    cursor: pointer;
+    z-index: 100;
+
+    &--line1,
+    &--line2 {
+      height: 0.2rem;
+      width: 3rem;
+      background: $color-white;
+      margin: 0.5rem;
+      pointer-events: none;
+    }
+  }
+}

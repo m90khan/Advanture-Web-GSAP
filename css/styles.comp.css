@@ -1,0 +1,312 @@
+/* 
+Proceeding with Good Approach : 
+Desktop First Apprach
+ using the analytics data for most used devices wrt to their width
+
+ 0-600px : Phone
+ 600-900px : Tablet Portrait
+ 900-1200px : Tablet Landscape
+1200-1800 : Desktop (where normal styles apply)
+1800+ : Big screens
+
+
+*/
+/* $breakpoint arguments 
+-phone
+-tab-port 
+-tab-land
+-big-desktop
+
+1em = 16px (as rem does not work in some browssers)
+
+Order: Base + typography > general layout + grid > page layout >componenets
+*/
+:root {
+  --h1: calc(2rem + 1vw);
+  --h2: calc(3.5rem + 1vw);
+  --h3: calc(3rem + 1vw);
+  --h4: calc(2.4rem + 1vw);
+  --p: calc(1.5rem + 1vw);
+  --bigtext: calc(6rem + 1vw);
+  --shadow-dark: 1rem 1rem 4rem rgba(0, 0, 0, 0.5),
+    -1rem -1rem 4rem rgba(0, 0, 0, 0.5);
+  --line: 1px solid var(--color-grey-light-2);
+  --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.05); }
+
+/* Global Reset */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; }
+  @media only screen and (max-width: 75em) {
+    html {
+      font-size: 56.25%; } }
+  @media only screen and (max-width: 56.25em) {
+    html {
+      font-size: 50%; } }
+
+li,
+button,
+label,
+input,
+p {
+  font-size: var(--text); }
+
+ul {
+  list-style: none; }
+
+a {
+  text-decoration: none; }
+
+::selection {
+  background-color: #ffb142;
+  color: #fff; }
+
+.opening {
+  animation: opening 1s ease-in-out; }
+
+@keyframes opening {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.fadeinleft,
+.fadeinright,
+.opening {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.fadeinleft {
+  animation: fadeinleft 1s ease-in-out 0.5s; }
+
+@keyframes fadeinleft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20%);
+    filter: blur(10px); }
+  80% {
+    opacity: 1;
+    transform: translateX(10%);
+    filter: blur(3px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0%); } }
+
+.fadeinright {
+  animation: fadeinright 1s ease-in-out 0.5s; }
+
+@keyframes fadeinright {
+  0% {
+    opacity: 0;
+    transform: translateX(20%);
+    filter: blur(10px); }
+  80% {
+    opacity: 1;
+    transform: translateX(-10%);
+    filter: blur(3px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0%); } }
+
+.moveinup {
+  animation: moveinup 1s ease-in-out 1s backwards; }
+
+@keyframes moveinup {
+  0% {
+    opacity: 0;
+    transform: translateY(20%); }
+  100% {
+    opacity: 1;
+    transform: translateY(0%); } }
+
+.u-tc {
+  text-align: center !important; }
+
+.u-mb-2 {
+  margin-bottom: 2rem !important; }
+
+.u-mb-4 {
+  margin-bottom: 4rem !important; }
+
+.u-mb-6 {
+  margin-bottom: 6rem !important; }
+
+.u-mb-8 {
+  margin-bottom: 8rem !important; }
+
+.u-mt-4 {
+  margin-top: 4rem !important; }
+
+h1, h2, h3, h4, h5 {
+  font-family: "Lato", sans-serif;
+  font-weight: 400; }
+
+li,
+button,
+label,
+input,
+p {
+  font-family: "Rubik", sans-serif;
+  font-weight: 100; }
+
+h1 {
+  font-size: var(--h1); }
+
+h2 {
+  font-size: var(--h2); }
+
+h3 {
+  font-size: var(--h3); }
+
+h4 {
+  font-size: var(--h4); }
+
+h5 {
+  font-size: var(--h5); }
+
+li,
+button,
+label,
+input,
+p {
+  font-size: var(--p); }
+
+.btn, .btn:link, .btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 6rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 1.8rem;
+  border: none;
+  cursor: pointer; }
+
+.btn:active, .btn:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; }
+
+.btn::after {
+  content: " ";
+  padding: 1.5rem 6rem;
+  display: inline-block;
+  border-radius: 10rem;
+  position: absolute;
+  font-size: 1.8rem;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.2s; }
+
+.btn--primary {
+  background-color: #fff;
+  color: #777; }
+  .btn--primary::after {
+    background-color: #fff; }
+
+.btn--secondary {
+  background-color: #ffb142;
+  color: #faf9f9; }
+  .btn--secondary::after {
+    background-color: #ffb142; }
+
+.btn-text, .btn-text:link, .btn-text:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffb142;
+  border-left: 2px solid #ffb142;
+  padding: 1rem;
+  display: inline-block;
+  transition: all 0.2s;
+  position: relative;
+  font-size: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden; }
+
+.btn-text:active, .btn-text:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn-text:hover {
+  transform: translateY(-3px);
+  color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .btn-text:hover::after {
+    transform: translateY(0%); }
+
+.btn-text::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.5s;
+  transform: translateX(-100%);
+  background: #ffb142;
+  z-index: -1; }
+
+.starter {
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #ffb142;
+  color: #fff; }
+  .starter .logo {
+    background: #f0eeee;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    border-radius: 1rem;
+    animation: tofro 4s ease-in-out infinite alternate; }
+    .starter .logo h2 {
+      background: linear-gradient(-45deg, #ffb142 0% 50%, #000 50% 100%);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text; }
+    .starter .logo img {
+      animation: rotate360 5s ease-in-out infinite; }
+
+@keyframes tofro {
+  0% {
+    transform: translateX(-10%); }
+  50% {
+    opacity: 1;
+    transform: translateX(10%); }
+  100% {
+    opacity: 1;
+    transform: translateX(0%) scale(1.5); } }
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(-360deg); } }
+
+/* */

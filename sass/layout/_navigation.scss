@@ -1,0 +1,70 @@
+.section-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $color-white;
+  opacity: 1;
+  clip-path: circle(50px at 100% -10%);
+  -webkit-clip-path: circle(50px at 100% -10%);
+}
+.nav-bar {
+  @include flex(row, space-around, center);
+  height: 100vh;
+  width: 90%;
+  margin: auto;
+
+  &__links {
+    flex: 1 1 25rem;
+    height: 50vh;
+    @include flex(column, space-between, flex-start);
+    padding-left: 5rem;
+    li {
+      font-size: 6rem;
+      font-weight: 600;
+      position: relative;
+      a {
+        color: $color-grey-dark;
+      }
+    }
+    li::after {
+      content: "";
+      bottom: -1rem;
+      left: 0;
+      width: 2rem;
+      background: $color-grey-dark;
+      height: 1rem;
+      opacity: 0;
+      position: absolute;
+      transition: all 0.5s ease-in-out;
+    }
+    li:hover::after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+  &__contact {
+    width: 50vw;
+    height: 60vh;
+    h2 {
+      font-family: $font-secondary;
+      font-size: 6rem;
+      font-weight: 600;
+    }
+    @include flex(column, space-evenly, flex-start);
+    .form {
+      width: 100%;
+      &-inputs {
+        @include flex(row, space-between, center);
+      }
+      input {
+        width: 48%;
+      }
+      textarea {
+        width: 100%;
+        margin: 2rem 0;
+      }
+    }
+  }
+}

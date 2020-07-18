@@ -1,0 +1,62 @@
+.slide {
+  min-height: 100vh;
+  color: $color-white;
+  @include flex(row, space-between, center);
+}
+.mountain {
+  flex-wrap: wrap;
+  &-img {
+    flex: 1 1 25rem;
+    position: relative;
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &-desc {
+    flex: 1 1 25rem;
+    padding-left: 5rem;
+    position: relative;
+    @include flex(column, space-evenly, flex-start);
+    min-height: 50vh;
+
+    &__title {
+      &-spanner {
+        &--mountain {
+          color: $color-primary;
+        }
+        &--hike {
+          color: $color-secondary;
+        }
+        &--fashion {
+          color: $color-tertiary;
+        }
+      }
+    }
+    p {
+      padding: 3rem 0;
+      color: $color-grey-light-4;
+    }
+  }
+}
+
+.mountain-img__reveal,
+.mountain-desc__reveal {
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background: $color-grey-dark;
+  left: 0;
+  top: 0;
+  backface-visibility: hidden;
+  transition: all 1s ease-in-out;
+}
+
+.cursor {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid $color-white;
+  border-radius: 5rem;
+  position: absolute;
+}
