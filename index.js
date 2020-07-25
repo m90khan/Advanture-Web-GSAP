@@ -1,3 +1,42 @@
+/*
+ * OLD WAY
+const button = document.querySelector(".btn");
+window.addEventListener("scroll", scrollReveal);
+function scrollReveal() {
+  //* getBoundingClientRect give us the data of the element wrt scroll
+
+  const buttonPos = button.getBoundingClientRect();
+  //* window.innerHeight gets the actual window height
+  const windowHeight = window.innerHeight / 1.5;
+  if (buttonPos < windowHeight) {
+    button.style.color = "yellow";
+  }
+
+   console.log(buttonPos);
+}
+* Better WAY:  Intersection Observer
+const slide = document.querySelector(".slide");
+
+let options = {
+  threshold: 0.5,
+};
+let observer = new IntersectionObserver(slideAnimation, options);
+function slideAnimation(entries) {
+  entries.forEach((entry) => {
+    console.log(entry);
+    if (entry.isIntersecting) {
+      slide.style.background = "red";
+    }
+  });
+}
+observer.observe(slide);
+observer.observe(button);
+
+* However, Libraries ike GSAP, scrollmagic solve this complexieties 
+
+
+*/
+
 // const controller = new ScrollMagic.Controller();
 
 // const exploreScene = new ScrollMagic.Scene({
@@ -20,7 +59,7 @@ function animateSlides() {
 
   sliders.forEach((slide, index, slides) => {
     const revealImg = slide.querySelector(".mountain-img__reveal");
-    const img = slide.querySelector("img");
+    const Image = slide.querySelector("img");
     const revealText = slide.querySelector(".mountain-desc__reveal");
 
     //GSAP    gsap.to(element tochange, duration, {properties to change})
@@ -28,13 +67,26 @@ function animateSlides() {
     // gsap.to(revealImg, 2, { x: "100%", scale: 1.3 });
 
     const slideT1 = gsap.timeline({
-      defaults: { duration: 1, ease: "power3.inOut" },
+      defaults: { duration: 0.5, ease: "power2.inOut" },
     });
     // to from fromTo timeline.fromTo( element, time, {From},{To});
 
-    slideT1.fromTo(revealImg, { x: "0%" }, { x: "100%" }, "-=1");
-    slideT1.fromTo(img, { scale: 3 }, { scale: 1 });
-    slideT1.fromTo(revealText, { x: "0%" }, { x: "100%" }, "-=2");
+    slideT1.fromTo(revealImg, { x: "0%" }, { x: "100%" });
+
+    slideT1.fromTo(
+      Image,
+      2,
+      { opacity: 0.5, scale: 0.8, borderRadius: "10%" },
+      { opacity: 1, scale: 3, borderRadius: "0" }
+    );
+
+    slideT1.fromTo(
+      Image,
+      2,
+      { opacity: 0.8, scale: 3 },
+      { opacity: 1, scale: 1, borderRadius: "4%" }
+    );
+    slideT1.fromTo(revealText, { x: "0%" }, { x: "100%" }, "-=3");
 
     //create a scene
     slideScene = new ScrollMagic.Scene({
@@ -43,11 +95,11 @@ function animateSlides() {
       reverse: false,
     })
       .setTween(slideT1)
-      .addIndicators({
-        colorStart: "white",
-        colorTrigger: "yellow",
-        name: "slide",
-      })
+      // .addIndicators({
+      //   colorStart: "white",
+      //   colorTrigger: "yellow",
+      //   name: "slide",
+      // })
       .addTo(controller);
 
     //New timeline
@@ -65,13 +117,13 @@ function animateSlides() {
     })
       .setTween(pageT1)
       .setPin(slide, { pushFollowers: false })
-      .addTo(controller)
-      .addIndicators({
-        colorStart: "white",
-        colorTrigger: "yellow",
-        name: "page",
-        indent: 200,
-      });
+      .addTo(controller);
+    // .addIndicators({
+    //   colorStart: "white",
+    //   colorTrigger: "yellow",
+    //   name: "page",
+    //   indent: 200,
+    // });
   });
 }
 
@@ -144,11 +196,20 @@ const logo = document.querySelector("#logo");
 
 barba.init({
   views: [
+    /*
+    - in Views, we can run certain functionalities
+    *assign the pages based on the namespace in html 
+    *then we can choose which fu nction to run where 
+    *and destroy the scene elenents before leaving 
+    * so not to effect the next page
+    
+    */
     {
       namespace: "home",
       beforeEnter() {
         animateSlides();
         logo.href = "./index.html";
+        gsap.fromTo(".section-header", 2, { y: "-100%" }, { y: "0%" });
       },
       beforeLeave() {
         slideScene.destroy();
@@ -169,6 +230,12 @@ barba.init({
     },
   ],
   transitions: [
+    /*
+     - in Transition, we have leave and enter
+     - in each of them we have (current, next) 
+     - current : is the current container
+     
+    */
     {
       leave({ current, next }) {
         let done = this.async();
@@ -190,8 +257,8 @@ barba.init({
         );
       },
       enter({ current, next }) {
-        let done = this.async();
-        //scroll to top
+        let done = this.async(); //*this.sync keeps track of leave and enter
+        // * scroll to top
         window.scrollTo(0, 0);
         //animation
         const pageTransition = gsap.timeline({
@@ -200,16 +267,21 @@ barba.init({
         pageTransition.fromTo(
           ".swipe",
           0.75,
-          { x: "0%" },
-          { x: "100%", stagger: 0.25, onComplete: done }
+          { y: "0%" },
+          { y: "100%", stagger: 0.25, onComplete: done }
         );
         pageTransition.fromTo(
           next.container,
-          1,
+          3,
           { opacity: 0 },
           { opacity: 1 }
         );
-        pageTransition.fromTo(".section-header", { y: "-100%" }, { y: "0%" });
+        pageTransition.fromTo(
+          ".section-header",
+          1,
+          { y: "-100%" },
+          { y: "0%" }
+        );
       },
     },
   ],
@@ -222,23 +294,28 @@ function detailAnimation() {
     const slideTl = gsap.timeline({ defaults: { duration: 1 } });
     let nextSlide = slides.length - 1 === index ? "end" : slides[index + 1];
     const nextImg = nextSlide.querySelector("img");
-    slideTl.fromTo(slide, { opacity: 1 }, { opacity: 0 });
+
+    slideTl.fromTo(slide, 2, { opacity: 1 }, { opacity: 0 });
+
     slideTl.fromTo(nextSlide, 1, { opacity: 0 }, { opacity: 1 });
-    slideTl.fromTo(nextImg, { x: "50%" }, { x: "0%" });
+    slideTl.fromTo(nextImg, 2, { x: "80%" }, { x: "0%" });
+    slideTl.fromTo(slide, 2, { y: "0%" }, { y: "20%" });
+
     //Scene
     detailScene = new ScrollMagic.Scene({
       triggerElement: slide,
       duration: "100%",
-      triggerHook: 0,
+      triggerHook: 0.1,
     })
       .setPin(slide, { pushFollowers: false })
       .setTween(slideTl)
-      // .addIndicators({
-      //   colorStart: "white",
-      //   colorTrigger: "white",
-      //   name: "detailScene"
-      // })
       .addTo(controller);
+
+    // .addIndicators({
+    //   colorStart: "white",
+    //   colorTrigger: "white",
+    //   name: "detailScene",
+    // })
   });
 }
 //eventlisteners
