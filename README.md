@@ -11,7 +11,7 @@ Visit an adventurous location for yoru next trip <br />
     <a href="m90khan@gmail.com"><strong>Contact Me</strong></a>
     <br />
     <br />
-    <a href="https://m90khan.github.io/Color-Palette-Generator/">View Demo</a>
+    <a href="https://m90khan.github.io/Fashion-GSAP/">View Demo</a>
     
    </p>
 </p>
@@ -28,7 +28,7 @@ Visit an adventurous location for yoru next trip <br />
 
 ### About the Project
 
-Live: https://m90khan.github.io/Color-Palette-Generator/
+Live: https://m90khan.github.io/Fashion-GSAP/
 <img src="./img/adven-gsap.gif">
 
 #### Process
