@@ -32,7 +32,7 @@ function slideAnimation(entries) {
 observer.observe(slide);
 observer.observe(button);
 
-* However, Libraries ike GSAP, scrollmagic solve this complexieties 
+* However, Libraries ike GSAP Animation Library and  scrollmagic solve this complexities 
 
 
 */
