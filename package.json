@@ -13,7 +13,7 @@
     "build:css": "npm-run-all compile:sass prefix:css compress:css"
   },
   "keywords": [
-    "fashion",
+    "adventure",
     "animation"
   ],
   "author": "KhanX",
