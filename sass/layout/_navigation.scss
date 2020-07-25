@@ -19,7 +19,7 @@
     @include flex(column, center, flex-start);
   }
   &__links {
-    flex: 1 1 30rem;
+    flex: 1 1 50rem;
     height: 50vh;
     @include flex(column, space-between, flex-start);
     @media only screen and (max-width: $bp-large) {

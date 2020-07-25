@@ -306,6 +306,19 @@ p {
 body.hide {
   overflow: hidden; }
 
+html {
+  /* Track */
+  /* Handle */
+  /* Handle on hover */ }
+  html::-webkit-scrollbar {
+    width: 0.5rem; }
+  html::-webkit-scrollbar-track {
+    background: #333; }
+  html::-webkit-scrollbar-thumb {
+    background: #567ce4; }
+  html::-webkit-scrollbar-thumb:hover {
+    background: #ff8b5d; }
+
 .section-fashion {
   min-height: 90vh; }
 
@@ -317,16 +330,15 @@ body.hide {
   color: #fff;
   width: 80%;
   margin: auto;
-  margin-top: 5rem;
   position: relative;
   flex-wrap: wrap;
-  height: 100vh; }
+  height: 90vh; }
   @media only screen and (max-width: 68.75em) {
     .fashion {
       width: 100%;
       text-align: center; } }
   .fashion-text {
-    flex: 1 0 30rem;
+    flex: 1 0 40rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -355,7 +367,7 @@ body.hide {
     height: 65%; }
     .fashion-image img {
       width: 100%;
-      height: 100%;
+      height: 120%;
       object-fit: cover; }
   .fashion-number {
     font-size: 15rem;
@@ -392,7 +404,7 @@ body.hide {
       justify-content: center;
       align-items: flex-start; } }
   .nav-bar__links {
-    flex: 1 1 30rem;
+    flex: 1 1 50rem;
     height: 50vh;
     display: flex;
     flex-direction: column;
