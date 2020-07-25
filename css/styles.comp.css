@@ -44,6 +44,9 @@ Order: Base + typography > general layout + grid > page layout >componenets
 html {
   box-sizing: border-box;
   font-size: 62.5%; }
+  @media only screen and (max-width: 1800px) {
+    html {
+      font-size: 75%; } }
   @media only screen and (max-width: 75em) {
     html {
       font-size: 56.25%; } }
@@ -192,7 +195,6 @@ p {
   transition: all 0.2s;
   position: relative;
   font-size: 1.8rem;
-  border: none;
   cursor: pointer; }
 
 .btn:active, .btn:focus {
@@ -223,9 +225,13 @@ p {
 .btn--primary {
   background-color: #17181a;
   color: #faf9f9;
-  border: 0.1rem solid #faf9f9;
+  border: 0.2rem solid #faf9f9;
   padding: 1rem 2rem;
   border-radius: 0.5rem; }
+  @media only screen and (max-width: 68.75em) {
+    .btn--primary {
+      width: 60%;
+      margin: 0 auto; } }
   .btn--primary::after {
     background-color: #567ce4; }
 
@@ -273,13 +279,18 @@ p {
   background: #567ce4;
   z-index: -1; }
 
+.section-header {
+  z-index: 2 !important;
+  position: relative; }
+
 .header {
   min-height: 10vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 0; }
+  padding: 3rem 0;
+  z-index: 5 !important; }
   .header__logo {
     color: #fff; }
   .header__burger--line1, .header__burger--line2 {
@@ -292,12 +303,87 @@ p {
 .scrollmagic-pin-spacer {
   position: static !important; }
 
+body.hide {
+  overflow: hidden; }
+
+html {
+  /* Track */
+  /* Handle */
+  /* Handle on hover */ }
+  html::-webkit-scrollbar {
+    width: 0.5rem; }
+  html::-webkit-scrollbar-track {
+    background: #333; }
+  html::-webkit-scrollbar-thumb {
+    background: #567ce4; }
+  html::-webkit-scrollbar-thumb:hover {
+    background: #ff8b5d; }
+
+.section-fashion {
+  min-height: 90vh; }
+
+.fashion {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  width: 80%;
+  margin: auto;
+  position: relative;
+  flex-wrap: wrap;
+  height: 90vh; }
+  @media only screen and (max-width: 68.75em) {
+    .fashion {
+      width: 100%;
+      text-align: center; } }
+  .fashion-text {
+    flex: 1 0 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end; }
+    .fashion-text__title {
+      font-size: 10rem;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500; }
+      @media only screen and (max-width: 68.75em) {
+        .fashion-text__title {
+          margin: 2rem 0; } }
+      .fashion-text__title--1 {
+        color: #ff8b5d; }
+      .fashion-text__title--2 {
+        color: #567ce4; }
+      .fashion-text__title--3 {
+        color: #a76ee7; }
+    .fashion-text p {
+      padding: 2rem;
+      margin-bottom: 5rem; }
+      @media only screen and (max-width: 68.75em) {
+        .fashion-text p {
+          padding: 0; } }
+  .fashion-image {
+    flex: 0.5 0 30rem;
+    height: 65%; }
+    .fashion-image img {
+      width: 100%;
+      height: 120%;
+      object-fit: cover; }
+  .fashion-number {
+    font-size: 15rem;
+    color: #faf9f9;
+    opacity: 0.5;
+    position: absolute;
+    left: 45%;
+    bottom: 5%; }
+
 .section-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1 !important;
   background: #fff;
   clip-path: circle(50px at 100% -10%);
   -webkit-clip-path: circle(50px at 100% -10%); }
@@ -309,19 +395,36 @@ p {
   align-items: center;
   height: 100vh;
   width: 90%;
-  margin: auto; }
+  margin: auto;
+  padding: 5rem; }
+  @media only screen and (max-width: 68.75em) {
+    .nav-bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start; } }
   .nav-bar__links {
-    flex: 1 1 25rem;
+    flex: 1 1 50rem;
     height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
-    padding-left: 5rem; }
+    align-items: flex-start; }
+    @media only screen and (max-width: 68.75em) {
+      .nav-bar__links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 55vw;
+        height: 20vh; } }
     .nav-bar__links li {
       font-size: 6rem;
       font-weight: 600;
       position: relative; }
+      @media only screen and (max-width: 68.75em) {
+        .nav-bar__links li {
+          font-size: 3rem; } }
       .nav-bar__links li a {
         color: #17181a; }
     .nav-bar__links li::after {
@@ -338,7 +441,7 @@ p {
       width: 100%;
       opacity: 1; }
   .nav-bar__contact {
-    width: 50vw;
+    width: 55vw;
     height: 60vh;
     display: flex;
     flex-direction: column;
@@ -361,6 +464,11 @@ p {
         width: 100%;
         margin: 2rem 0; }
 
+@media only screen and (max-width: 68.75em) {
+  main {
+    width: 100%;
+    margin: 0; } }
+
 .slide {
   min-height: 100vh;
   color: #fff;
@@ -368,6 +476,11 @@ p {
   flex-direction: row;
   justify-content: space-between;
   align-items: center; }
+  @media only screen and (max-width: 68.75em) {
+    .slide {
+      display: block;
+      width: 100%;
+      text-align: center; } }
 
 .mountain {
   flex-wrap: wrap;
@@ -376,6 +489,9 @@ p {
     flex: 1 1 25rem;
     position: relative;
     overflow: hidden; }
+    @media only screen and (max-width: 68.75em) {
+      .mountain-img {
+        padding-top: 2rem; } }
     .mountain-img__image {
       width: 100%;
       height: 100%;
@@ -389,6 +505,12 @@ p {
     justify-content: space-evenly;
     align-items: flex-start;
     min-height: 50vh; }
+    @media only screen and (max-width: 68.75em) {
+      .mountain-desc {
+        padding: 0;
+        min-height: 50vh;
+        text-align: center;
+        align-items: center; } }
     .mountain-desc__title {
       overflow: hidden;
       position: relative; }
@@ -416,6 +538,10 @@ p {
     .mountain-desc p {
       padding: 3rem 0;
       color: #ccc; }
+      @media only screen and (max-width: 68.75em) {
+        .mountain-desc p {
+          padding: 1rem 0.5rem;
+          text-align: center; } }
 
 .mountain-img__reveal,
 .mountain-desc__reveal {
@@ -454,5 +580,22 @@ p {
 .cursor.explore--active {
   background: #fff;
   transform: scale(3); }
+
+.swipe {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%); }
+  .swipe--1 {
+    background: #567ce4;
+    z-index: 5; }
+  .swipe--2 {
+    background: #ff8b5d;
+    z-index: 4; }
+  .swipe--3 {
+    background: #a76ee7;
+    z-index: 3; }
 
 /* */
